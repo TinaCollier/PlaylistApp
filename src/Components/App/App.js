@@ -15,19 +15,23 @@ function App() {
     { name: 'name3', artist: 'artist3', album: 'album3' }
   ];
 
-  const [playlistName, setPlaylistName] = useState('My Playlist');
-
-  const [album, setAlbum] = useState({});
-  let defaultAlbum;
-  if(album.length === 0){
-    defaultAlbum = [
+  const [playlistTracks, setPlaylistTracks] = useState([]);
+  
+  const defaultPlaylistTracks = [
       { name: 'playlistName1', artist: 'playlistArtist1', album: 'playlistAlbum1', id: 1},
       { name: 'playlistName2', artist: 'playlistArtist2', album: 'playlistAlbum2', id: 2},
       { name: 'playlistName3', artist: 'playlistArtist3', album: 'playlistAlbum3', id: 3},
     ]
+  
+
+
+  let addTrack = (track) => {
+    let tracks = defaultPlaylistTracks;
+    if (tracks.find(savedTrack => savedTrack.id === track.id)) return;
+
+    tracks.push(track);
+    setPlaylistTracks({ playlistTracks: tracks });
   }
-
-
 
   return (
     <div>
@@ -35,8 +39,8 @@ function App() {
       <div className="App">
         <SearchBar />
         <div className="App-playlist">
-          <SearchResults searchResults={ searchResults.length ? searchResults : defaultSearchResults } />
-          <Playlist />
+          <SearchResults searchResults={ searchResults.length ? searchResults : defaultSearchResults } onClick={ addTrack } />
+          <Playlist  />
         </div>
       </div>
     </div>

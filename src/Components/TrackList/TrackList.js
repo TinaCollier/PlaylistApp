@@ -4,11 +4,9 @@ import Track from '../Track/Track';
 
 const TrackList = props => {
     const { tracks } = props;
-
-    
     
     const trackComponents = tracks && tracks.length && tracks.map( track => 
-        <Track trackName={ track.name } trackArtist={ track.artist} key={ track.name } />
+        <Track trackName={ track.name } trackArtist={ track.artist } trackAlbum= { track.album } key={ track.name } />
     );
 
     return (
